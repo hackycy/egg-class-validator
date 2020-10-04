@@ -1,5 +1,5 @@
 {
-  "name": "egg-class-validator",
+  "name": "@hackycy/egg-class-validator",
   "version": "0.0.1",
   "description": "class-validator plugin for Egg.js",
   "eggPlugin": {
@@ -8,7 +8,8 @@
   "keywords": [
     "egg",
     "eggPlugin",
-    "egg-plugin"
+    "egg-plugin",
+    "class-validator"
   ],
   "dependencies": {
     "class-validator": "^0.12.2"
@@ -37,21 +38,24 @@
   },
   "files": [
     "app.js",
-    "agent.js",
-    "config",
-    "app"
+    "app/**/*.js",
+    "package.json",
+    "index.d.ts",
+    "README.md",
+    "LICENSE"
   ],
+  "types": "index.d.ts",
   "ci": {
     "version": "8, 10"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/eggjs/egg-class-validator.git"
+    "url": "git+https://github.com/hackycy/egg-class-validator"
   },
   "bugs": {
-    "url": "https://github.com/eggjs/egg/issues"
+    "url": "https://github.com/hackycy/egg-class-validator/issues"
   },
-  "homepage": "https://github.com/eggjs/egg-class-validator#readme",
+  "homepage": "https://github.com/hackycy/egg-class-validator",
   "author": "hackycy",
   "license": "MIT"
 }
