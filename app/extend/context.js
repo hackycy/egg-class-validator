@@ -16,6 +16,9 @@ module.exports = {
     const errors = await this.app.validator.validate(instanceCls, options);
     if (errors.length > 0) {
       this.throw(422, 'Validation Failed', { errors });
+    } else {
+      // 返回创建的实例
+      return instanceCls;
     }
   },
 };
