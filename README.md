@@ -77,17 +77,16 @@ export default class HomeController extends Controller {
   public async test() {
     const { ctx } = this;
     // 默认验证body
-    const err = await ctx.validate(Post);
+    await ctx.validate(Post);
     ctx.logger.error(err);
-    ctx.body = err;
+    ctx.body = 'success';
   }
 
   public async testg() {
     const { ctx } = this;
-    // 等同于 app.validator.validate
-    const err = await ctx.validate(Id, ctx.request.query);
-    ctx.logger.error(err);
-    ctx.body = err;
+    // 等同于 app.validator.validate，ctx上的验证可以快速验证并直接抛出异常
+    await ctx.validate(Id, ctx.request.query);
+    ctx.body = 'success';
   }
 }
 ```
