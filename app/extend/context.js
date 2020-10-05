@@ -4,8 +4,8 @@ const { plainToClass } = require('class-transformer');
 module.exports = {
   /**
    * validate data with options
-   * @param  {Object} type - validate target, default to `this.request.body`
-   * @param  {Object} data - validate target, default to `this.request.body`
+   * @param  {Object} type - validate target
+   * @param  {Object} data - validate data, default to `this.request.body`
    * @param  {Object} options  - validate options object, see [class-validator](https://github.com/typestack/class-validator)
    * @return {Promise} Promise<ValidationError[]> - validate errors
    */
