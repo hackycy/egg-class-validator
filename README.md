@@ -84,7 +84,6 @@ export default class HomeController extends Controller {
 
   public async testg() {
     const { ctx } = this;
-    // 等同于 app.validator.validate，ctx上的验证可以快速验证并直接抛出异常
     await ctx.validate(Id, ctx.request.query);
     ctx.body = 'success';
   }
