@@ -1,6 +1,6 @@
 {
   "name": "@hackycy/egg-class-validator",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "class-validator plugin for Egg.js",
   "eggPlugin": {
     "name": "classValidator"
@@ -12,7 +12,9 @@
     "class-validator"
   ],
   "dependencies": {
-    "class-validator": "^0.12.2"
+    "class-transformer": "^0.3.1",
+    "class-validator": "^0.12.2",
+    "reflect-metadata": "^0.1.13"
   },
   "devDependencies": {
     "autod": "^3.0.1",
