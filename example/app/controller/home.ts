@@ -10,15 +10,13 @@ export default class HomeController extends Controller {
 
   public async test() {
     const { ctx } = this;
-    const err = await ctx.validate(Post);
-    ctx.logger.error(err);
-    ctx.body = err;
+    await ctx.validate(Post);
+    ctx.body = 'success';
   }
 
   public async testg() {
     const { ctx } = this;
-    const err = await ctx.validate(Id, ctx.request.query);
-    ctx.logger.error(err);
-    ctx.body = err;
+    await ctx.validate(Id, ctx.request.query);
+    ctx.body = 'success';
   }
 }
