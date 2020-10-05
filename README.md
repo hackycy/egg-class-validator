@@ -24,10 +24,80 @@ exports.classValidator = {
 };
 ```
 
-## 有问题或Bug
+## 定义验证类
+
+``` typescript
+import {
+    Contains,
+    IsInt,
+    Length,
+    IsEmail,
+    IsFQDN,
+    IsDate,
+    Min,
+    Max,
+  } from 'class-validator';
+
+export class Post {
+    @Length(10, 20)
+    title: string;
+  
+    @Contains('hello')
+    text: string;
+  
+    @IsInt()
+    @Min(0)
+    @Max(10)
+    rating: number;
+  
+    @IsEmail()
+    email: string;
+  
+    @IsFQDN()
+    site: string;
+  
+    @IsDate()
+    createDate: Date;
+  }
+```
+
+## 验证
+
+``` typescript
+import { Controller } from 'egg';
+import { Id } from '../dto/id';
+import { Post } from '../dto/post';
+
+export default class HomeController extends Controller {
+  public async index() {
+    const { ctx } = this;
+    ctx.body = await ctx.service.test.sayHi('egg');
+  }
+
+  public async test() {
+    const { ctx } = this;
+    // 默认验证body
+    const err = await ctx.validate(Post);
+    ctx.logger.error(err);
+    ctx.body = err;
+  }
+
+  public async testg() {
+    const { ctx } = this;
+    // 等同于 app.validator.validate
+    const err = await ctx.validate(Id, ctx.request.query);
+    ctx.logger.error(err);
+    ctx.body = err;
+  }
+}
+```
+
+> 已经在Application对象上挂载了validator属性，即`class-validator`的Validator。更多操作可以查看官方的[文档](https://github.com/typestack/class-validator)
+
+# 有问题或Bug
 
 请提出[issues](https://github.com/hackycy/egg-class-validator/issues)
 
-## License
+# License
 
 [MIT](LICENSE)
