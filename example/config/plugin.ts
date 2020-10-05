@@ -6,6 +6,10 @@ const plugin: EggPlugin = {
   //   enable: true,
   //   package: 'egg-view-nunjucks',
   // },
+  classValidator: {
+    enable: true,
+    package: '@hackycy/egg-class-validator',
+  }
 };
 
 export default plugin;
