@@ -21,6 +21,13 @@ export default (appInfo: EggAppInfo) => {
     },
   }
 
+  // 配置 class-transformer options
+  config.classValidator = {
+    classTransformOptions: {
+      excludeExtraneousValues: false
+    }
+  }
+
   // the return config will combines to EggAppConfig
   return {
     ...config,
