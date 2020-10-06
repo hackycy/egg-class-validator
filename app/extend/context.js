@@ -22,7 +22,7 @@ module.exports = {
     if (errors.length > 0) {
       if (this.app.config.classValidator && this.app.config.classValidator.handleError && this.app.config.classValidator.handleError instanceof Function) {
         // 如果定义了处理错误的函数，则交给定义的函数进行处理
-        this.config.classValidator.handleError(this, errors);
+        this.app.config.classValidator.handleError(this, errors);
       } else {
         // 默认实现
         this.throw(422, 'Validation Failed', { errors });
