@@ -17,7 +17,13 @@ module.exports = {
     // return Promise<ValidationError[]>
     const errors = await this.app.validator.validate(instanceCls, options);
     if (errors.length > 0) {
-      this.throw(422, 'Validation Failed', { errors });
+      if (this.config.classValidator.handleError && this.config.classValidator.handleError instanceof Function) {
+        // 如果定义了处理错误的函数，则交给定义的函数进行处理
+        this.config.classValidator.handleError(this, errors);
+      } else {
+        // 默认实现
+        this.throw(422, 'Validation Failed', { errors });
+      }
     } else {
       // 返回创建的实例
       return instanceCls;

@@ -1,4 +1,4 @@
-import { Validator, ValidatorOptions } from 'class-validator'
+import { Validator, ValidatorOptions, ValidationError } from 'class-validator'
 import { ClassTransformOptions } from 'class-transformer'
 
 declare module 'egg' {
@@ -17,6 +17,7 @@ declare module 'egg' {
        * @description class-transformer option
        */
       classTransformOptions?: ClassTransformOptions
+      handleError?: (ctx: Context, errors: ValidationError[]) => void
     }
   }
 }
