@@ -1,4 +1,5 @@
 import { Validator, ValidatorOptions } from 'class-validator'
+import { ClassTransformOptions } from 'class-transformer'
 
 declare module 'egg' {
 
@@ -10,4 +11,12 @@ declare module 'egg' {
     validator: Validator
   }
 
+  interface EggAppConfig {
+    classValidator: {
+      /**
+       * @description class-transformer option
+       */
+      classTransformOptions?: ClassTransformOptions
+    }
+  }
 }
