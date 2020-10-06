@@ -9,8 +9,9 @@ module.exports = {
    * @param  {Object} options  - validate options object, see [class-validator](https://github.com/typestack/class-validator)
    * @return {Promise} Promise<ValidationError[]> - validate errors
    */
-  async validate(type, data, options = { forbidUnknownValues: true }) {
+  async validate(type, data, options) {
     data = data || this.request.body;
+    options = options || { forbidUnknownValues: true, whitelist: true, skipMissingProperties: false, forbidNonWhitelisted: true };
     // 增加转换配置，默认开启类型安全
     const instanceCls = plainToClass(type, data, this.config.classValidator.classTransformOptions || { excludeExtraneousValues: true });
     // return Promise<ValidationError[]>
