@@ -10,8 +10,9 @@ export default class HomeController extends Controller {
 
   public async test() {
     const { ctx } = this;
-    await ctx.validate(Post);
-    ctx.body = 'success';
+    // 会获得具体的类型
+    const p = await ctx.validate<Post>(Post);
+    ctx.body = p;
   }
 
   public async testg() {
