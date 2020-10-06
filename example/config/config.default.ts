@@ -24,7 +24,12 @@ export default (appInfo: EggAppInfo) => {
   // 配置 class-transformer options
   config.classValidator = {
     classTransformOptions: {
-      excludeExtraneousValues: false
+      excludeExtraneousValues: false,
+    },
+    // 自定义错误处理
+    handleError: (ctx, _errors) => {
+      ctx.logger.error(_errors);
+      ctx.throw(422, '参数异常');
     }
   }
 
