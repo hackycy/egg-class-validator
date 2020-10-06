@@ -116,6 +116,11 @@ export default (appInfo: EggAppInfo) => {
   config.classValidator = {
     classTransformOptions: {
       excludeExtraneousValues: false
+    }，
+    // 自定义错误处理
+    handleError: (ctx, _errors) => {
+      // 做你想做的事情，第一个参数为Context，第二个参数为ValidationError[]
+      ctx.throw(400, '参数异常');
     }
   }
 
