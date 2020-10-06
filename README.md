@@ -98,7 +98,34 @@ export default class HomeController extends Controller {
 }
 ```
 
-> 已经在Application对象上挂载了validator属性，即`class-validator`的Validator。更多操作可以查看官方的[文档](https://github.com/typestack/class-validator)
+> `ctx.validate`会将传入的校验数据对象转换成`Type`指定的类型的，指定范型可以更友好的使用类型。
+>
+> 已经在Application对象上挂载了validator属性，即`class-validator`的Validator。
+>
+> 更多操作可以查看官方的[文档](https://github.com/typestack/class-validator)
+
+转换对象使用了[class-transformer](https://github.com/typestack/class-transformer)，可以在config中配置
+
+``` typescript
+import { EggAppConfig, EggAppInfo, PowerPartial } from 'egg';
+
+export default (appInfo: EggAppInfo) => {
+  const config = {} as PowerPartial<EggAppConfig>;
+
+  // 配置 class-transformer options
+  config.classValidator = {
+    classTransformOptions: {
+      excludeExtraneousValues: false
+    }
+  }
+
+  // the return config will combines to EggAppConfig
+  return {
+    ...config,
+    ...bizConfig,
+  };
+};
+```
 
 # 有问题或Bug
 
