@@ -77,9 +77,9 @@ export default class HomeController extends Controller {
   public async test() {
     const { ctx } = this;
     // 默认验证body
-    // 会获得具体的类型
+    // 验证无误会获得具体的类型
+    // 否则会抛出异常
     const p = await ctx.validate<Post>(Post);
-    ctx.logger.error(err);
     ctx.body = 'success';
   }
 
