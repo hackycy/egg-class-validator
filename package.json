@@ -41,6 +41,7 @@
   "files": [
     "app.js",
     "app/**/*.js",
+    "config/**/*.js",
     "package.json",
     "index.d.ts",
     "README.md",
