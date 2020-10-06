@@ -12,12 +12,15 @@ module.exports = {
   async validate(type, data, options) {
     data = data || this.request.body;
     options = options || { validationError: { target: false }, forbidUnknownValues: true, whitelist: true, skipMissingProperties: false, forbidNonWhitelisted: true };
+    const classTransformOptions =
+      this.app.config.classValidator
+      && this.app.config.classValidator.classTransformOptions ? this.app.config.classValidator.classTransformOptions : { excludeExtraneousValues: true };
     // 增加转换配置，默认开启类型安全
-    const instanceCls = plainToClass(type, data, this.config.classValidator.classTransformOptions || { excludeExtraneousValues: true });
+    const instanceCls = plainToClass(type, data, classTransformOptions);
     // return Promise<ValidationError[]>
     const errors = await this.app.validator.validate(instanceCls, options);
     if (errors.length > 0) {
-      if (this.config.classValidator.handleError && this.config.classValidator.handleError instanceof Function) {
+      if (this.app.config.classValidator && this.app.config.classValidator.handleError && this.app.config.classValidator.handleError instanceof Function) {
         // 如果定义了处理错误的函数，则交给定义的函数进行处理
         this.config.classValidator.handleError(this, errors);
       } else {
