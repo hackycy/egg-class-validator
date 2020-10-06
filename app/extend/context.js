@@ -11,7 +11,8 @@ module.exports = {
    */
   async validate(type, data, options = { forbidUnknownValues: true }) {
     data = data || this.request.body;
-    const instanceCls = plainToClass(type, data);
+    // 增加转换配置，默认开启类型安全
+    const instanceCls = plainToClass(type, data, this.config.classValidator.classTransformOptions || { excludeExtraneousValues: true });
     // return Promise<ValidationError[]>
     const errors = await this.app.validator.validate(instanceCls, options);
     if (errors.length > 0) {
