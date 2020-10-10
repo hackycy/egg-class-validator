@@ -12,12 +12,14 @@ export default class HomeController extends Controller {
     const { ctx } = this;
     // 会获得具体的类型
     const p = await ctx.validate<Post>(Post);
+    this.ctx.logger.info(p);
     ctx.body = p;
   }
 
   public async testg() {
     const { ctx } = this;
-    await ctx.validate(Id, ctx.request.query);
+    const dto = await ctx.validate(Id, ctx.request.query);
+    this.ctx.logger.info(dto);
     ctx.body = 'success';
   }
 }

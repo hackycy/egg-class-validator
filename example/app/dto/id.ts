@@ -1,12 +1,18 @@
-import { Expose } from 'class-transformer';
+import { Expose, Transform } from 'class-transformer';
 import {
-    IsEmail,
+    IsNumberString,
+    IsInt,
   } from 'class-validator';
 
 export class Id {
 
-    @Expose()
-    @IsEmail()
-    email: string;
+  @IsNumberString()
+  @Expose()
+  sid: string;
+
+  @IsInt()
+  @Transform(value => { return parseInt(value) }, { toClassOnly: true })
+  @Expose()
+  id: number;
 
 }

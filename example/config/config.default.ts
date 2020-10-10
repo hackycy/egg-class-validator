@@ -24,6 +24,7 @@ export default (appInfo: EggAppInfo) => {
   // 配置 class-transformer options
   config.classValidator = {
     classTransformOptions: {
+      // 该配置设置为true会将Dto没有加上@Expose的属性删除掉
       excludeExtraneousValues: false,
     },
     // 自定义错误处理

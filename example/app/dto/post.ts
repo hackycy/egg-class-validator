@@ -4,36 +4,31 @@ import {
     IsInt,
     Length,
     IsEmail,
-    IsFQDN,
-    IsDate,
+    // IsFQDN,
+    // IsDate,
     Min,
     Max,
   } from 'class-validator';
 
 export class Post {
-    @Expose()
+    
     @Length(10, 20)
+    @Expose()
     title: string;
 
     @Expose()
     @Contains('hello')
     text: string;
 
-    @Expose()
+    
     @IsInt()
     @Min(0)
     @Max(10)
+    @Expose()
     rating: number;
 
-    @Expose()
+    
     @IsEmail()
+    @Expose()
     email: string;
-
-    @Expose()
-    @IsFQDN()
-    site: string;
-
-    @Expose()
-    @IsDate()
-    createDate: Date;
   }
