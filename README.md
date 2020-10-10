@@ -100,7 +100,7 @@ export default class HomeController extends Controller {
 
 > `ctx.validate`会将传入的校验数据对象转换成`Type`指定的类型，指定范型可以更友好的使用类型。
 >
-> 已经在Application对象上挂载了validator属性，即`class-validator`的Validator。
+> 已经在Application对象上挂载了validator属性，即`class-validator`的Validator。可以在该属性扩展更多schema等。
 >
 > 更多操作可以查看官方的[文档](https://github.com/typestack/class-validator)
 
