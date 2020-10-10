@@ -83,22 +83,22 @@ export default class HomeController extends Controller {
 
   public async test() {
     const { ctx } = this;
-    // 默认验证body
-    // 验证无误会获得具体的类型
-    // 否则会抛出异常
+    // 会获得具体的类型
     const p = await ctx.validate<Post>(Post);
-    ctx.body = 'success';
+    this.ctx.logger.info(p);
+    ctx.body = p;
   }
 
   public async testg() {
     const { ctx } = this;
-    await ctx.validate(Id, ctx.request.query);
+    const dto = await ctx.validate(Id, ctx.request.query);
+    this.ctx.logger.info(dto);
     ctx.body = 'success';
   }
 }
 ```
 
-> `ctx.validate`会将传入的校验数据对象转换成`Type`指定的类型的，指定范型可以更友好的使用类型。
+> `ctx.validate`会将传入的校验数据对象转换成`Type`指定的类型，指定范型可以更友好的使用类型。
 >
 > 已经在Application对象上挂载了validator属性，即`class-validator`的Validator。
 >
@@ -131,6 +131,43 @@ export default (appInfo: EggAppInfo) => {
   };
 };
 ```
+
+## 获取Query值为String类型问题
+
+在处理`Get`的请求中获取的`query`参数都是String类型，那么定义Dto的时候就无法直接使用`@IsInt`注解，只能使用`@IsNumberString`来做参数验证。这里提供一个思路来提前将Query的参数转换需要的类型。
+
+**DTO定义**
+
+``` typescript
+import { Expose, Transform } from 'class-transformer';
+import {
+    IsNumberString,
+    IsInt,
+  } from 'class-validator';
+
+export class Id {
+
+  @IsNumberString()
+  @Expose()
+  sid: string;
+
+  @IsInt()
+  @Transform(value => { return parseInt(value) }, { toClassOnly: true })
+  @Expose()
+  id: number;
+
+}
+```
+
+> 重点是`class-transformer`的`@Transform`注解。
+>
+> 这里需要理解框架处理的顺序，当使用`ctx.validate`方法时，
+>
+> 1、首先使用[class-transformer](https://github.com/typestack/class-transformer)将验证的参数转为成转换成`Type`指定的类型，那么定义的注解就会先执行转换类型。
+>
+> 2、然后再使用[class-validator](https://github.com/typestack/class-validator)进行参数校验
+>
+> 更多查看example提供示例
 
 # 有问题或Bug
 
