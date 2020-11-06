@@ -1,34 +1,34 @@
 import { Expose } from 'class-transformer';
 import {
-    Contains,
-    IsInt,
-    Length,
-    IsEmail,
-    // IsFQDN,
-    // IsDate,
-    Min,
-    Max,
-  } from 'class-validator';
+  Contains,
+  IsInt,
+  Length,
+  IsEmail,
+  // IsFQDN,
+  // IsDate,
+  Min,
+  Max,
+} from 'class-validator';
 
 export class Post {
-    
-    @Length(10, 20)
-    @Expose()
-    title: string;
 
-    @Expose()
-    @Contains('hello')
-    text: string;
+  @Length(10, 20)
+  @Expose()
+  title: string;
 
-    
-    @IsInt()
-    @Min(0)
-    @Max(10)
-    @Expose()
-    rating: number;
+  @Expose()
+  @Contains('hello')
+  text: string;
 
-    
-    @IsEmail()
-    @Expose()
-    email: string;
-  }
+
+  @IsInt()
+  @Min(0)
+  @Max(10)
+  @Expose()
+  rating: number;
+
+
+  @IsEmail()
+  @Expose()
+  email: string;
+}

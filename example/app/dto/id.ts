@@ -1,8 +1,8 @@
 import { Expose, Transform } from 'class-transformer';
 import {
-    IsNumberString,
-    IsInt,
-  } from 'class-validator';
+  IsNumberString,
+  IsInt,
+} from 'class-validator';
 
 export class Id {
 
@@ -11,7 +11,7 @@ export class Id {
   sid: string;
 
   @IsInt()
-  @Transform(value => { return parseInt(value) }, { toClassOnly: true })
+  @Transform(value => { return parseInt(value); }, { toClassOnly: true })
   @Expose()
   id: number;
 
